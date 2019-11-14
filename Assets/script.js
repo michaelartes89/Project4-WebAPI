@@ -84,6 +84,28 @@ startBtn.addEventListener("click", function () {
     beginGame();
 });
 
+// see scorelist
+
+scoreLink.addEventListener("click", function() {
+    event.preventDefault();
+    if (scoreShown) {
+        scoreShown =false;
+        scoreCard.style.display = "none";
+    } else {
+        scoreShow = true;
+        scoreCard.style.display ="block";
+    }
+    scoreSet();
+});
+
+scoreCard.style.display = "none"; //set score to hidden by default 
+
+//clear saved scores
+clearBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    clearScores();
+
+});
 
 
 
