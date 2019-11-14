@@ -234,6 +234,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             iter = 0;
             timer = questions.length * probelmTime;
 
+            questCard.classList.remove("shake");
+            void questCard.offsetWidth;
+
+            newQuestions = shuffle(newQuestions);
+
             setQuestions(iter);
 
             interval = setInterval(function () {
@@ -247,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     endGame();
                 }
             }, 1000);
+        }
 
         });
 
