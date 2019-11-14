@@ -155,6 +155,40 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         }
 
+        //build scorecard
+        function scoreSet () {
+            scoreList = JSON.parse(localStorage.getItem("scores") || "[]");
+            highScoreList.innerHTML = "";
+            console.log(scorelist);
+
+            scoreList.sort(function (a,b) {
+                return parseInt (b.score) -parseInt(a.score);
+            });
+            console.log(scoreList);
+
+            if (scoreList.length ===0) {
+                clearBTnArea.style.display = "none";
+                alert.textContent = "Test your skills";
+            } else {
+                clearBTnArea.style.display = "block";
+                maxScore = scoreList[0].score; 
+                alert.textContent = "Previous high score: " + maxScore;
+
+            }
+
+            for (let j = 0; j < scoreList.length; j++) {
+                var scoreDisp = scoreList[j]. user + ": " + scorelist[j].score; 
+
+                var li = document.createElement("li");
+                li.textContent = scoreDisp; 
+                highScoreList.appendChild(li);
+            }
+            }
+
+            
+
+        }
+
 
 
 
