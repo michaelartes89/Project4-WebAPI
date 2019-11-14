@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var cBtn = document.getElementById("DanswerBtn");
     var dBtn = document.getElementById("DanswerBtn");
 
-    var probelmTime = 15;
+    var problemTime = 15;
     var penalty = 5;
 
     var iter = 0;
@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var newQuestions = questions;
     var scoreList = [];
     var maxScore = 0;
-    var scoreshown = false;
+    var scoreShown = false;
 
-    instructions.textContent = ("Your score is your number of correct ansers times " + problemTime + "plus the time remaning. When you get a question wrong you lose" + penalty + "seconds from your time");
+    instructions.textContent = ("Your score is your number of correct anwsers times "+problemTime+"plus the time remaning. When you get a question wrong you lose"+penalty+"seconds from your time");
 
     // randomize array elements oder in place using Durstenfeld shuffle algorith (as seen in Alex's repo)
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //resets card to the next quetions 
     function setQuestions(index) {
-        questText.textContent = question[index].title;
+        questText.textContent = questions[index].title;
         let choiceArray = questions[index].choices
         choiceArray = shuffle(choiceArray)
 
@@ -76,9 +76,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         d.textContent = choiceArray[3];
 
     }
+
     //adding eventlisteners to buttons
 
-    startBtn.addEventListener("click", function () {
+    startBtn.addEventListener("click", function() {
         startCard.style.display = "none";
         questCard.style.display = "block";
         beginGame();
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // see scorelist
 
-    scoreLink.addEventListener("click", function () {
+    scoreLink.addEventListener("click", function(event) {
         event.preventDefault();
         if (scoreShown) {
             scoreShown = false;
@@ -108,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     //assigns listeners to answer buttons
-    var addBtns = document.getElementsByClassName("asnwerBtn");
+    var addBtns = document.getElementsByClassName("answerBtn");
     for (var i = 0; i < addBtns.length; i++) {
         addBtns[i].addEventListener("click", userChoice, false);
     }
@@ -120,10 +121,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     function userChoice(event) {
         event.preventDefault();
 
-        let userAnwer = "";
-        userAnwer = event.target.nextElementSibling.textContent;
+        let userAnswer = "";
+        userAnswer = event.target.nextElementSibling.textContent;
 
-        if (userAnwer === newQuestions[iter].anwser) {
+        if (userAnswer === newQuestions[iter].anwser) {
             console.log("win");
             console.log(iter);
             correct++;
@@ -136,12 +137,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             wrong++;
             if (wrong > 1) {
                 questCard.classList.remove("shake");
-                void questCard.offsetWidthl
+                void questCard.offsetWidth
                 questCard.classList.add("shake");
 
 
-            } else {
-                questCard.classList.add("shake");
+            } else { questCard.classList.add("shake"); }
                 footer.textContent = "Wrong!"
             }
             if (iter < (newQuestions.length - 1)) {
@@ -156,33 +156,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
 
         //build scorecard
-        function scoreSet () {
+        function scoreSet() {
             scoreList = JSON.parse(localStorage.getItem("scores") || "[]");
-            highScoreList.innerHTML = "";
+            highScoreList.innerHTML = ":"
             console.log(scorelist);
 
-            scoreList.sort(function (a,b) {
-                return parseInt (b.score) -parseInt(a.score);
+            scoreList.sort(function (a, b) {
+                return parseInt(b.score) - parseInt(a.score);
             });
             console.log(scoreList);
 
-            if (scoreList.length ===0) {
-                clearBTnArea.style.display = "none";
+            if (scoreList.length === 0) {
+                clearBtnArea.style.display = "none";
                 alert.textContent = "Test your skills";
             } else {
-                clearBTnArea.style.display = "block";
+                clearBtnArea.style.display = "block";
                 maxScore = scoreList[0].score; 
                 alert.textContent = "Previous high score: " + maxScore;
 
             }
 
             for (let j = 0; j < scoreList.length; j++) {
-                var scoreDisp = scoreList[j]. user + ": " + scorelist[j].score; 
+                var scoreDisp = scoreList[j].user + ": " + scoreList[j].score; 
 
                 var li = document.createElement("li");
                 li.textContent = scoreDisp; 
                 highScoreList.appendChild(li);
-            }
+                }
             }
 
             //clear saved scores and local storage
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-        }
+        
 
 
 
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             correct = 0;
             wrong = 0;
             iter = 0;
-            timer = questions.length * probelmTime;
+            timer = questions.length * problemTime;
 
             questCard.classList.remove("shake");
             void questCard.offsetWidth;
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             interval = setInterval(function () {
 
-                timerDisp.textContent = timer;
+                timerDisplay.textContent = timer;
                 timer--;
 
                 if (timer < 0) {
@@ -251,8 +251,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 } else if (iter >= newQuestions.length) {
                     endGame();
                 }
+
             }, 1000);
         }
 
-        });
+    });
 
