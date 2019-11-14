@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Code Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
-    <h1>Under Contruction...Please come again soon</h1>
-    
+    <!-- nav bar with high score button and timer-->
+
+    <nav class="navbar fixed-top navbar-light bg-light">
+        <span id="scoreLink" class="navbar -text btn btn-success"> High Score</span>
+        <a class="navbar-brand">Welcome to JavaScript Quiz </a>
+        <span id="timerText" class="navbar-text">Timer: <span id="timer">0</span> 
+        </span>
+    </nav>
+
+
+        <!-- container for the starting screen-->
+        <div id="initialCard">
+            <div class="row justify-content-center">
+                <div class="col col-sm-10 col-md-8 align-self-center">
+                    <div class="card text-center">
+                        <h5 id="alert" class="card-header"> Previous High Score</h5>
+                        <div class="card-body">
+                        <h5 class="card-title">Click the button to begin</h5>
+                        <p id="instructions" class="card-text"></p> 
+                        <span id="startButton" class="btn btn-success">Start</span>
+                        </div>
+                        <div class="card-footer text-muter">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
 </body>
+
 </html>
