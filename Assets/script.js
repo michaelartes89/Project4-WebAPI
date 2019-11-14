@@ -46,4 +46,67 @@ var scoreList = [];
 var maxScore = 0;
 var scoreshown = false;
 
+instructions.textContent = ("Your score is your number of correct ansers times "+problemTime+ "plus the time remaning. When you get a question wrong you lose" +penalty+ "seconds from your time");
+
+// randomize array elements oder in place using Durstenfeld shuffle algorith (as seen in Alex's repo)
+
+function shuffle (array) {
+    var currentIndex = array.length, temporaryValue, randonIndex;
+
+    while(0 !== currentIndex){
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
 }
+
+    //resets card to the next quetions 
+function setQuestions(index) {
+    questText.textContent = question[index].title;
+    let choiceArray = questions[index].choices
+    choiceArray = shuffle(choiceArray)
+    
+    a.textContent = choiceArray[0];
+    b.textContent = choiceArray[1];
+    c.textContent = choiceArray[2];
+    d.textContent = choiceArray[3];
+
+}
+//adding eventlisteners to buttons
+
+startBtn.addEventListener("click", function () {
+    startCard.style.display = "none";
+    questCard.style.display = "block";
+    beginGame();
+});
+
+
+
+
+//starts the game 
+function beginGame() {
+    correct = 0;
+    wrong = 0;
+    iter = 0;
+    timer = questions.length * probelmTime; 
+
+    setQuestions(iter);
+
+    interval = setInterval(function() {
+
+        timerDisp.textContent = timer;
+        timer--;
+        
+        if (timer <0) {
+            endgame();
+        } else if (iter >= newQuestions.length) {
+            endGame();
+        }
+    },1000);
+
+    });
+
