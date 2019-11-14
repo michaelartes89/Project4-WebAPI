@@ -107,6 +107,12 @@ clearBtn.addEventListener("click", function (event) {
 
 });
 
+//assigns listeners to answer buttons
+var addBtns = document.getElementsByClassName("asnwerBtn");
+for (var i = 0; i < addBtns.length; i++) {
+    addBtns[i].addEventListener("click", userChoice, false);
+}
+
 
 
 //starts the game 
