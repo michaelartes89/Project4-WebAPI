@@ -192,6 +192,31 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 localStorage.setItem("score", JSON.stringify(scoreList));
                 scoreSet();
             }
+
+            //ends game run, calculates and stores the score
+
+            function endGame() {
+                clearInterval(interval); 
+                endTime = timer; 
+                timer = 0; 
+                timerDisp.textContent = timer; 
+                console.log("wins" + correct + ", losses " + wrong + ", " + endTime);
+                startCard.style.display = "block";
+                questCard.style.display = "none";
+
+                let highScore = (correct * problemTime + endTime);
+                let userInput = prompt("Your score is correct * problemTime + endTime. Enter Your Initials:");
+                if (userInput === null) {
+                    userInput ==="???";
+                }
+                scoreList = JSON.parse(localStorage.getItem("score") || "[]");
+                scoreList.push({ score: highScore, user: userInput });
+
+                localStorage.setItem("scores",JSON.stringify(scorelist));
+                scoreSet();
+
+                footer.textContent = "Play Again...if you dare";
+            }
             
 
 
