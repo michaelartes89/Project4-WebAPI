@@ -185,7 +185,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
             }
 
+            //clear saved scores and local storage
+
+            function clearScore() {
+                scoreList = []; 
+                localStorage.setItem("score", JSON.stringify(scoreList));
+                scoreSet();
+            }
             
+
+
 
         }
 
