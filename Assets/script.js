@@ -14,7 +14,7 @@
     var highScoreList = document.getElementById("highScoreList");
     var instructions = document.getElementById("instructions");
 
-    var questText = document.getElementById("questionPromt");
+    var questText = document.getElementById("questionPrompt");
     var clearBtn = document.getElementById("clearBtn");
     var clearBTnArea = document.getElementById("clearBtnArea");
 
@@ -46,12 +46,12 @@
     var maxScore = 0;
     var scoreShown = false;
 
-    instructions.textContent = ("Your score is your number of correct anwsers times "+problemTime+"plus the time remaning. When you get a question wrong you lose"+penalty+"seconds from your time");
+    instructions.textContent = ("Your score is your number of correct anwsers times " +problemTime+ " plus the time remaning. When you get a question wrong you lose " +penalty+ " seconds from your time");
 
     // randomize array elements oder in place using Durstenfeld shuffle algorith (as seen in Alex's repo)
 
     function shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randonIndex;
+        var currentIndex = array.length, temporaryValue, randomIndex;
 
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -65,7 +65,7 @@
     }
 
     //resets card to the next quetions 
-    function setQuestions(index) {
+    function setQuestion(index) {
         questText.textContent = questions[index].title;
         let choiceArray = questions[index].choices
         choiceArray = shuffle(choiceArray)
@@ -124,7 +124,7 @@
         let userAnswer = "";
         userAnswer = event.target.nextElementSibling.textContent;
 
-        if (userAnswer === newQuestions[iter].anwser) {
+        if (userAnswer === newQuestions[iter].answser) {
             console.log("win");
             console.log(iter);
             correct++;
@@ -146,7 +146,7 @@
             }
             if (iter < (newQuestions.length - 1)) {
                 iter++;
-                setQuestions(iter);
+                setQuestion(iter);
 
             } else if (iter === (newQuestions.length - 1)) {
                 iter++;
@@ -192,7 +192,7 @@
 
             //clear saved scores and local storage
 
-            function clearScore() {
+            function clearScores() {
                 scoreList = []; 
                 localStorage.setItem("score", JSON.stringify(scoreList));
                 scoreSet();
@@ -204,7 +204,7 @@
                 clearInterval(interval); 
                 endTime = timer; 
                 timer = 0; 
-                timerDisp.textContent = timer; 
+                timerDisplay.textContent = timer; 
                 console.log("wins" + correct + ", losses " + wrong + ", " + endTime);
                 startCard.style.display = "block";
                 questCard.style.display = "none";
@@ -217,7 +217,7 @@
                 scoreList = JSON.parse(localStorage.getItem("score") || "[]");
                 scoreList.push({ score: highScore, user: userInput });
 
-                localStorage.setItem("scores",JSON.stringify(scorelist));
+                localStorage.setItem("scores",JSON.stringify(scoreList));
                 scoreSet();
 
                 footer.textContent = "Play Again...if you dare";
@@ -244,7 +244,7 @@
 
             newQuestions = shuffle(newQuestions);
 
-            setQuestions(iter);
+            setQuestion(iter);
 
             interval = setInterval(function () {
 
@@ -252,7 +252,7 @@
                 timer--;
 
                 if (timer < 0) {
-                    endgame();
+                    endGame();
                 } else if (iter >= newQuestions.length) {
                     endGame();
                 }
