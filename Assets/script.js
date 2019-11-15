@@ -1,5 +1,5 @@
 //wait until page is loaded
-document.addEventListener("DOMContentLoaded", function (event) {
+//document.addEventListener("DOMContentLoaded", function (event) {
 
     //create variables to target DOM elements
 
@@ -20,16 +20,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     //answer input
-    var a = document.getElementById("AAnwers");
-    var b = document.getElementById("BAnwers");
-    var c = document.getElementById("CAnwers");
-    var d = document.getElementById("DAnwers");
+    var a = document.getElementById("AAnswer");
+    var b = document.getElementById("BAnswer");
+    var c = document.getElementById("CAnswer");
+    var d = document.getElementById("DAnswer");
 
     //answer buttons
-    var aBtn = document.getElementById("AanswerBtn");
-    var bBtn = document.getElementById("BanswerBtn");
-    var cBtn = document.getElementById("DanswerBtn");
-    var dBtn = document.getElementById("DanswerBtn");
+    var aBtn = document.getElementById("AAnswerBtn");
+    var bBtn = document.getElementById("BAnswerBtn");
+    var cBtn = document.getElementById("CAnswerBtn");
+    var dBtn = document.getElementById("DAnswerBtn");
 
     var problemTime = 15;
     var penalty = 5;
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 iter++;
                 setQuestions(iter);
 
-            } else if (iter === (newQUestions.length - 1)) {
+            } else if (iter === (newQuestions.length - 1)) {
                 iter++;
             }
 
@@ -158,10 +158,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //build scorecard
         function scoreSet() {
             scoreList = JSON.parse(localStorage.getItem("scores") || "[]");
-            highScoreList.innerHTML = ":"
-            console.log(scorelist);
+            for(var i = 0; i < scoreList.length; i++) {
+                var scoreLI =document.createElement("li");
+                scoreLI.innerText=`${i}: ${scoreList[i]}`
+                highScoreList.append(scoreLI);
+            }
+        
 
-            scoreList.sort(function (a, b) {
+           /* scoreList.sort(function (a, b) {
                 return parseInt(b.score) - parseInt(a.score);
             });
             console.log(scoreList);
@@ -183,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 li.textContent = scoreDisp; 
                 highScoreList.appendChild(li);
                 }
+                */
             }
 
             //clear saved scores and local storage
@@ -255,5 +260,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }, 1000);
         }
 
-    });
+   // });
 
